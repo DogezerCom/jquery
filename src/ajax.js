@@ -653,7 +653,7 @@ jQuery.extend( {
 			( s.beforeSend.call( callbackContext, jqXHR, s ) === false || completed ) ) {
 
 			// Abort if not done already and return
-			return jqXHR.abort();
+		+	return jqXHR.abort();
 		}
 
 		// Aborting is no longer a cancellation
@@ -706,7 +706,7 @@ jQuery.extend( {
 		}
 
 		// Callback for when everything is done
-		function done( status, nativeStatusText, responses, headers ) {
+		function done( status, nativeStatusText, responses, headers, redirectURL ) {
 			var isSuccess, success, error, response, modified,
 				statusText = nativeStatusText;
 
@@ -791,7 +791,7 @@ jQuery.extend( {
 
 			// Success/Error
 			if ( isSuccess ) {
-				deferred.resolveWith( callbackContext, [ success, statusText, jqXHR ] );
+				deferred.resolveWith( callbackContext, [ success, statusText, jqXHR, redirectURL ] );
 			} else {
 				deferred.rejectWith( callbackContext, [ jqXHR, statusText, error ] );
 			}

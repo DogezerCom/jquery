@@ -106,7 +106,8 @@ jQuery.ajaxTransport( function( options ) {
 									typeof xhr.responseText !== "string" ?
 										{ binary: xhr.response } :
 										{ text: xhr.responseText },
-									xhr.getAllResponseHeaders()
+									xhr.getAllResponseHeaders(),
+									xhr.responseURL						
 								);
 							}
 						}

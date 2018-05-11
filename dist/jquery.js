@@ -9010,7 +9010,7 @@ jQuery.extend( {
 		}
 
 		// Callback for when everything is done
-		function done( status, nativeStatusText, responses, headers ) {
+		function done( status, nativeStatusText, responses, headers, redirectURL ) {
 			var isSuccess, success, error, response, modified,
 				statusText = nativeStatusText;
 
@@ -9095,7 +9095,7 @@ jQuery.extend( {
 
 			// Success/Error
 			if ( isSuccess ) {
-				deferred.resolveWith( callbackContext, [ success, statusText, jqXHR ] );
+				deferred.resolveWith( callbackContext, [ success, statusText, jqXHR, redirectURL ] );
 			} else {
 				deferred.rejectWith( callbackContext, [ jqXHR, statusText, error ] );
 			}
@@ -9348,7 +9348,8 @@ jQuery.ajaxTransport( function( options ) {
 									typeof xhr.responseText !== "string" ?
 										{ binary: xhr.response } :
 										{ text: xhr.responseText },
-									xhr.getAllResponseHeaders()
+									xhr.getAllResponseHeaders(),
+									xhr.responseURL
 								);
 							}
 						}
@@ -9702,8 +9703,6 @@ jQuery.fn.load = function( url, params, callback ) {
 
 	return this;
 };
-
-
 
 
 // Attach a bunch of functions for handling common AJAX events
